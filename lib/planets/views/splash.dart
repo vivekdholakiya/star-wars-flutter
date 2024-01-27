@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:lottie/lottie.dart';
+import 'package:swapi/planets/views/planetslist.dart';
 
 import 'no_internet.dart';
 
@@ -38,11 +41,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void getData() async {
-    await Future.delayed(const Duration(seconds: 3));
 
+    await Future.delayed(const Duration(seconds: 3));
     bool result = await InternetConnectionChecker().hasConnection;
     if (result == true) {
-      Text("inter net conected");
+      Text("ferfe");
+      print("object");
+      Get.to(PlanetScreen());
     } else {
       if (!mounted) return;
       Navigator.push(context, MaterialPageRoute(builder: (context) {
