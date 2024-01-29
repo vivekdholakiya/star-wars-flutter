@@ -38,6 +38,7 @@ dependencies:
   internet_connection_checker: ^0.0.1+2
   lottie: ^3.0.0
   get: ^4.6.6
+  http: ^1.2.0
 
 
 dev_dependencies:
@@ -78,6 +79,16 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: WorkSans
+      fonts:
+        - asset: assets/fonts/WorkSans-Regular.ttf
+        - asset: assets/fonts/WorkSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/WorkSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/WorkSans-Bold.ttf
+          weight: 700
   # fonts:
   #   - family: Schyler
   #     fonts:
