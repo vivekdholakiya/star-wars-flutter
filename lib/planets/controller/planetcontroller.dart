@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart'as http;
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:intl/intl.dart';
 import 'package:swapi/planets/views/no_internet.dart';
 
 import '../views/planetslist.dart';
@@ -12,7 +13,7 @@ import '../views/planetslist.dart';
 class PlanetController extends GetxController {
 
   final PageController  pageController = PageController();
-  int activePage = 0;
+  RxInt i = 0.obs;
   RxList AllList = [].obs;
   RxList planetList = [
     {
@@ -22,17 +23,47 @@ class PlanetController extends GetxController {
     },
     {
       'name': "Alderaan",
-      'imagePath': "assets/images/alderaan_planet.png",
+      'imagePath': "assets/images/Alderaan.png",
       'colors': [const Color(0xffbdc3c7), const Color(0xff2c3e50)]
     },
     {
       'name': "Yavin IV",
-      'imagePath': "assets/images/yavin_planet.png",
+      'imagePath': "assets/images/Yavin.png",
       'colors': [const Color(0xff2C5364), const Color(0xff0F2027)]
     },
     {
       'name': "Hoth",
-      'imagePath': "assets/images/hoth_planet.png",
+      'imagePath': "assets/images/Hoth.png",
+      'colors': [const Color(0xff525252), const Color(0xff3d72b4)]
+    },
+    {
+      'name': "Dagobah",
+      'imagePath': "assets/images/Dagobah.png",
+      'colors': [const Color(0xff525252), const Color(0xff3d72b4)]
+    },
+    {
+      'name': "Bespin",
+      'imagePath': "assets/images/Bespin.png",
+      'colors': [const Color(0xff525252), const Color(0xff3d72b4)]
+    },
+    {
+      'name': "Endor",
+      'imagePath': "assets/images/Endor.png",
+      'colors': [const Color(0xff525252), const Color(0xff3d72b4)]
+    },
+    {
+      'name': "Naboo",
+      'imagePath': "assets/images/Naboo.png",
+      'colors': [const Color(0xff525252), const Color(0xff3d72b4)]
+    },
+    {
+      'name': "Coruscant",
+      'imagePath': "assets/images/Coruscant.png",
+      'colors': [const Color(0xff525252), const Color(0xff3d72b4)]
+    },
+    {
+      'name': "kamino",
+      'imagePath': "assets/images/Kamino.png",
       'colors': [const Color(0xff525252), const Color(0xff3d72b4)]
     },
   ].obs;
@@ -40,17 +71,14 @@ class PlanetController extends GetxController {
   RxString url = "https://swapi.dev/api/planets".obs;
 
    goToHome() async {
-
     await Future.delayed(const Duration(seconds: 3));
     bool result = await InternetConnectionChecker().hasConnection;
     if (result == true) {
-      Get.to(PlanetScreen());
+      Get.offAll(PlanetScreen());
     } else {
       Get.to(NoInternet());
     }
   }
-
-
   getData() async {
     http.Response response = await http.get(Uri.parse(url.value));
     if (response.statusCode == 200) {
@@ -62,6 +90,15 @@ class PlanetController extends GetxController {
       debugPrint('${response.statusCode}');
     }
   }
+   RxString res = "".obs;
+  late RxInt intValue;
+
+  String formatNumber(int number) {
+    NumberFormat formatter = NumberFormat.compact();
+    return formatter.format(number);
+  }
+  RxInt number =0.obs;
+  RxString formattedNumberresult = "".obs;
 
 
 }
