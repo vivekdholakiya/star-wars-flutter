@@ -36,7 +36,8 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Image.asset('assets/images/star_wars.png'),
             ),
             Expanded(child: Lottie.asset('assets/images/animation.json')),
-          ],
+            Text("Powerd by vivekDholakiya "),
+                ],
         ),
       ),
     );

@@ -19,7 +19,8 @@ class PlanetController extends GetxController {
     {
       'name': "Tatooine",
         'imagePath': "assets/images/Tatooine.webp",
-      'colors': [const Color(0xff659999), const Color(0xfff4791f)]
+      'colors': [const Color(0xff659999), const Color(0xfff4791f)],
+      'color' : 659999
     },
     {
       'name': "Alderaan",
@@ -38,28 +39,28 @@ class PlanetController extends GetxController {
     },
     {
       'name': "Dagobah",
-      'imagePath': "assets/images/Dagobah.png",
-      'colors': [const Color(0xff525252), const Color(0xff3d72b4)]
+      'imagePath': "assets/images/Degobh.png",
+      'colors': [const Color(0xff6d8b45), const Color(0xff33342f)]
     },
     {
       'name': "Bespin",
-      'imagePath': "assets/images/Bespin.png",
-      'colors': [const Color(0xff525252), const Color(0xff3d72b4)]
+      'imagePath': "assets/images/bespin.png",
+      'colors': [const Color(0xffec8f4c), const Color(0xffde9c46)]
     },
     {
       'name': "Endor",
       'imagePath': "assets/images/Endor.png",
-      'colors': [const Color(0xff525252), const Color(0xff3d72b4)]
+      'colors': [const Color(0xffd9bcb8), const Color(0xff463b45)]
     },
     {
       'name': "Naboo",
       'imagePath': "assets/images/Naboo.png",
-      'colors': [const Color(0xff525252), const Color(0xff3d72b4)]
+      'colors': [const Color(0xffaed1d7), const Color(0xff2c3a3d)]
     },
     {
       'name': "Coruscant",
       'imagePath': "assets/images/Coruscant.png",
-      'colors': [const Color(0xff525252), const Color(0xff3d72b4)]
+      'colors': [const Color(0xff3abbf4), const Color(0xff0b1014)]
     },
     {
       'name': "kamino",

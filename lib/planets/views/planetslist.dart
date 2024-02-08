@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:intl/intl.dart';
 import 'package:swapi/planets/controller/planetcontroller.dart';
 import 'package:swapi/planets/views/planetdetail.dart';
 
@@ -27,6 +26,8 @@ class _PlanetScreenState extends State<PlanetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black12,
+      // Color(planetController.planetList[0]["color"]),
       body: Obx(() {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -59,107 +60,227 @@ class _PlanetScreenState extends State<PlanetScreen> {
                 ]),
               ),
             ),
-            SizedBox(
-              height: Get.height - 150,
+            Expanded(
               child: PageView(
+                controller: planetController.pageController,
+                scrollDirection: Axis.horizontal,
                 children: [
-                  for (int i = 0; i < planetController.AllList.length; i++)
+                  for ( int i = 0; i < planetController.AllList.length; i++)
                     Padding(
                       padding: EdgeInsets.only(bottom: 16),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          AnimatedBuilder(
-                              animation: planetController.pageController,
-                              builder: (context, child) {
-                                return Stack(
-                                  children: [
-                                    Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: ClipPath(
-                                        // clipper: CharacterCardBackgroundClipper(),
-                                        child: Container(
-                                          height: Get.height * 0.55,
-                                          width: Get.width * 0.9,
-                                          decoration: BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: planetController.planetList[i]
-                                                    ['colors'],
-                                                begin: Alignment.topRight,
-                                                end: Alignment.bottomLeft,
-                                              ),
-                                              borderRadius: BorderRadius.circular(20)),
+                      child: AnimatedBuilder(
+                          animation: planetController.pageController,
+                          builder: (context, child) {
+                            return Stack(
+                              children: [
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: InkWell(
+                                    onTap: () {
+                                      planetController.i.value = i;
+                                      if (planetController.AllList[
+                                      planetController.i.value]
+                                      ["population"] !=
+                                          "unknown") {
+                                        planetController.number
+                                            .value = int.parse(planetController
+                                            .AllList[planetController.i.value]
+                                        ["population"]);
+                                        planetController
+                                            .formattedNumberresult.value =
+                                            planetController.formatNumber(
+                                                planetController.number.value);
+                                        print(
+                                            "Formatted number: ${planetController.formattedNumberresult}");
+                                        Get.to(PlanetDetail());
+                                      } else {
+                                        planetController.formattedNumberresult =
+                                            "".obs;
+                                        Get.to(PlanetDetail());
+                                      }
+                                      // print("pci ${planetController.i}");
+                                    },
+                                    child: Container(
+                                      height: Get.height * 0.55,
+                                      width: Get.width * 0.9,
+                                      decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: planetController.planetList[i]
+                                            ['colors'],
+                                            begin: Alignment.topRight,
+                                            end: Alignment.bottomLeft,
+                                          ),
+                                          borderRadius: BorderRadius.circular(20)),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.only(left: 48.0, bottom: 16.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      const Spacer(),
+                                      Text(
+                                        planetController.AllList[i]['name'],
+                                        style: TextStyle(
+                                          fontFamily: 'WorkSans',
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 34,
+                                          color: Colors.white.withOpacity(0.8),
+                                          letterSpacing: 1.2,
                                         ),
                                       ),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 48.0, bottom: 16.0),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          Text(planetController.AllList[i]['name'],
-                                              style: TextStyle(
-                                                fontFamily: 'WorkSans',
-                                                fontWeight: FontWeight.w900,
-                                                fontSize: 34,
-                                                color: Colors.white.withOpacity(0.8),
-                                                letterSpacing: 1.2,
-                                              )),
-                                          InkWell(
-                                            onTap: () {
-                                              planetController.i.value = i;
-                                              print(
-                                                  "planetList langth ${planetController.planetList.length}");
-                                              print(
-                                                  "population---> ${planetController.AllList[planetController.i.value]["population"]}");
-                                              planetController.number
-                                                  .value = int.parse(planetController
-                                                      .AllList[planetController.i.value]
-                                                  ["population"]);
-                                              planetController
-                                                      .formattedNumberresult.value =
-                                                  planetController.formatNumber(
-                                                      planetController.number.value);
-                                              print(
-                                                  "Formatted number: ${planetController.formattedNumberresult}");
-                                              Get.to(PlanetDetail());
+                                      InkWell(
+                                        onTap: () {
+                                          planetController.i.value = i;
+                                          if (planetController.AllList[
+                                          planetController.i.value]
+                                          ["population"] !=
+                                              "unknown") {
+                                            planetController.number
+                                                .value = int.parse(planetController
+                                                .AllList[planetController.i.value]
+                                            ["population"]);
+                                            planetController
+                                                .formattedNumberresult.value =
+                                                planetController.formatNumber(
+                                                    planetController.number.value);
+                                            print(
+                                                "Formatted number: ${planetController.formattedNumberresult}");
+                                            Get.to(PlanetDetail());
+                                          } else {
+                                            planetController.formattedNumberresult =
+                                                "".obs;
+                                            Get.to(PlanetDetail());
+                                          }
+                                          // print("pci ${planetController.i}");
+                                        },
 
-                                              // print("pci ${planetController.i}");
-                                            },
-                                            child: Text(
-                                              'Tap to see details',
-                                              style: TextStyle(
-                                                inherit: true,
-                                                fontFamily: 'WorkSans',
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 24,
-                                                color: Colors.white.withOpacity(0.8),
-                                              ),
-                                            ),
+                                        child: Text(
+                                          'Tap to see details',
+                                          style: TextStyle(
+                                            inherit: true,
+                                            fontFamily: 'WorkSans',
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 24,
+                                            color: Colors.white.withOpacity(0.8),
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                    )
-                                  ],
-                                );
-                              })
-                        ],
-                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            );
+                          }),
                     ),
-                ],
-              ),
-            ),
+                ],              ),
+            )
+            // Expanded(
+            //   child: SizedBox(
+            //     height: Get.height-115,
+            //     child: PageView(
+            //       controller: planetController.pageController,
+            //       children: [
+            //         for (int i = 0; i < planetController.AllList.length; i++)
+            //           Padding(
+            //             padding: EdgeInsets.only(bottom: 16),
+            //             child: Column(
+            //               mainAxisAlignment: MainAxisAlignment.end,
+            //               children: [
+            //                 AnimatedBuilder(
+            //                     animation: planetController.pageController,
+            //                     builder: (context, child) {
+            //                       return Stack(
+            //                         children: [
+            //                           Align(
+            //                             alignment: Alignment.bottomCenter,
+            //                             child: Container(
+            //                               height: Get.height * 0.55,
+            //                               width: Get.width * 0.9,
+            //                               decoration: BoxDecoration(
+            //                                   gradient: LinearGradient(
+            //                                     colors: planetController.planetList[i]
+            //                                         ['colors'],
+            //                                     begin: Alignment.topRight,
+            //                                     end: Alignment.bottomLeft,
+            //                                   ),
+            //                                   borderRadius: BorderRadius.circular(20)),
+            //                             ),
+            //                           ),
+            //                           Padding(
+            //                             padding:
+            //                                 const EdgeInsets.only(left: 48.0, bottom: 16.0),
+            //                             child: Column(
+            //                               crossAxisAlignment: CrossAxisAlignment.start,
+            //                               mainAxisAlignment: MainAxisAlignment.end,
+            //                               children: [
+            //                                 const Spacer(),
+            //                                 Text(
+            //                                   planetController.AllList[i]['name'],
+            //                                   style: TextStyle(
+            //                                     fontFamily: 'WorkSans',
+            //                                     fontWeight: FontWeight.w900,
+            //                                     fontSize: 34,
+            //                                     color: Colors.white.withOpacity(0.8),
+            //                                     letterSpacing: 1.2,
+            //                                   ),
+            //                                 ),
+            //                                 InkWell(
+            //                                   onTap: () {
+            //                                     planetController.i.value = i;
+            //                                     if (planetController.AllList[
+            //                                                 planetController.i.value]
+            //                                             ["population"] !=
+            //                                         "unknown") {
+            //                                       planetController.number
+            //                                           .value = int.parse(planetController
+            //                                               .AllList[planetController.i.value]
+            //                                           ["population"]);
+            //                                       planetController
+            //                                               .formattedNumberresult.value =
+            //                                           planetController.formatNumber(
+            //                                               planetController.number.value);
+            //                                       print(
+            //                                           "Formatted number: ${planetController.formattedNumberresult}");
+            //                                       Get.to(PlanetDetail());
+            //                                     } else {
+            //                                       planetController.formattedNumberresult =
+            //                                           "".obs;
+            //                                       Get.to(PlanetDetail());
+            //                                     }
+            //                                     // print("pci ${planetController.i}");
+            //                                   },
+            //                                   child: Text(
+            //                                     'Tap to see details',
+            //                                     style: TextStyle(
+            //                                       inherit: true,
+            //                                       fontFamily: 'WorkSans',
+            //                                       fontWeight: FontWeight.w500,
+            //                                       fontSize: 24,
+            //                                       color: Colors.white.withOpacity(0.8),
+            //                                     ),
+            //                                   ),
+            //                                 ),
+            //                               ],
+            //                             ),
+            //                           )
+            //                         ],
+            //                       );
+            //                     })
+            //               ],
+            //             ),
+            //           ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
           ],
         );
       }),
     );
-  }
-
-  String formatNumber(int number) {
-    NumberFormat formatter = NumberFormat.compact();
-    return formatter.format(number);
   }
 }
 

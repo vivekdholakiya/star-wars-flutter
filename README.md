@@ -2,15 +2,20 @@
 
 A new Flutter project.
 
-## Getting Started
+fonts:
+- family: WorkSans
+fonts:
+- asset: assets/fonts/WorkSans-Regular.ttf
+- asset: assets/fonts/WorkSans-Medium.ttf
+weight: 500
+- asset: assets/fonts/WorkSans-SemiBold.ttf
+weight: 600
+- asset: assets/fonts/WorkSans-Bold.ttf
+weight: 700
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  internet_connection_checker: ^0.0.1+2
+  lottie: ^3.0.0
+  get: ^4.6.6
+  http: ^1.2.0
+  font_awesome_flutter: ^10.7.0
+  intl: ^0.19.0
